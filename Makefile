@@ -12,5 +12,6 @@ libcos_doubles.so : cos_doubles.cpp
 
 clean :
 	rm -vf libcos_doubles.so cos_doubles.o cos_doubles.pyc
-run : 
+
+run : libcos_doubles.so
 	python3 test_run.py
