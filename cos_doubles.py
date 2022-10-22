@@ -17,7 +17,17 @@ libcd.cos_doubles.restype = None
 libcd.cos_doubles.argtypes = [array_1d_double, array_1d_double, c_int]
 
 
+libcd.matrixToQuaternion.restype = None
+libcd.matrixToQuaternion.argtypes = [
+  npct.ndpointer(dtype=np.double, shape=(3,3), flags='CONTIGUOUS'), 
+  npct.ndpointer(dtype=np.double, shape=(4), flags='CONTIGUOUS')]
+
 def cos_doubles_func(in_array):
   out_array = np.zeros_like(in_array)
   libcd.cos_doubles(in_array, out_array, len(in_array))
   return out_array
+
+def matrixToQuaternion(R):
+  q = np.zeros(4)
+  libcd.matrixToQuaternion(R,q)
+  return q
